@@ -34,7 +34,7 @@
     if (@$_REQUEST['dir']!='' && substr($_REQUEST['dir'], 0, 1)!='.') {
     	$c_talks = db_s('talks', array('dir' => $_REQUEST['dir']));
     	$talk = db_fetch($c_talks);
-    	echo '<div id="wait"><h1>'.$talk['title'].'</h1><h2>'.$talk['author'].'</h2><a href="#0"><img src="/i/start.png" alt="Play" width="256" height="256" /></a><h3>'.implode('.', array_reverse(explode('-', $talk['date']))).'</h3></div>';
+    	echo '<div id="wait"><h1>'.$talk['title'].'</h1><h2>'.$talk['author'].'</h2><a href="#0" class="vidPlay">▶</a><h3>'.implode('.', array_reverse(explode('-', $talk['date']))).'</h3></div>';
     	echo '<div id="overlay">';
     		echo '<img src="/i/close.png" class="close" alt="&times;" title="Close" width="22" height="22" />';
     		echo '<iframe></iframe>';
@@ -56,7 +56,7 @@
 			$track['link'] = $links;
 /*
 			if ($sound['file']!='') {
-				echo '<a href="edit/tmp/'.$sound['file'].'" class="pict"><img src="/i/pict.png" width="16" height="16" alt="" /></a>';
+				echo '<a href="/tmp/'.$sound['file'].'" class="pict"><img src="/i/pict.png" width="16" height="16" alt="" /></a>';
 			}
 			if ($sound['entities']!='') {
 				$e = preg_split('/\s/',$sound['entities']);

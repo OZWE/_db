@@ -1,22 +1,52 @@
 /* Save & Undo methods */
 
 var kKeepAliveInterval = 2*60*1000;
+var currentFormForImageEdit = null;
+var currentFormInput = null;
 
 function notifyChange(input) {
 	input.closest('form').addClass('dirty');
 	$('#btnSave').addClass('dirty');
 }
 
+function showImageForm(inputId, boundToLink) {
+	currentFormInput = inputId;
+	currentFormForImageEdit = $(boundToLink).closest('form');
+	currentFileName = currentFormForImageEdit.find('input[name=file]').val();
+	if (currentFileName==='') {
+		resetFile(inputId.substring(9));
+	}
+	else {
+		showFile(inputId.substring(9), currentFileName, false);
+	}
+	fileFormCopy(currentFormForImageEdit, $('#fileEdit'));
+	$('#fileEdit').fadeIn();
+	return false;
+}
+
+function fileFormCopy(source, target) {
+	target.find('input[name=file_credits]').val(source.find('input[name=file_credits]').val());
+	target.find('input[name=file_link]').val(source.find('input[name=file_link]').val());
+}
+
+function closeImageForm(save) {
+	if (save) {
+		currentFormForImageEdit.find('input[name=file]').val($('#'+currentFormInput).val());
+		fileFormCopy($('#fileEdit'), currentFormForImageEdit);
+		notifyChange(currentFormForImageEdit);
+	}
+	$('#fileEdit').fadeOut();
+	return false;
+}
+
 function updatePreviewContents() {
 	$('#previewContents>div').html('<img src="/i/loading.gif" class="loading" />');
 	$.getJSON('index.php', {'f':'getStructure', 'dir':$('header form select[name=dir]').val()}, function(ret){
-		console.log(ret.data);
 		var toc = '';
 		for (var i=0; i<ret.data.length; i++) {
 			toc+= '<a href="#c'+i+'"><h2>'+ret.data[i].title+'</h2>';
 			var cj = (ret.data[i].p.length);
 			for (var j=0; j<cj; j++) {
-				console.log("text:"+ret.data[i].p[j].text);
 				toc+= '<p class="'+ret.data[i].p[j].type+'">'+ret.data[i].p[j].text+'</p>';
 			}
 			toc+= '</a>';

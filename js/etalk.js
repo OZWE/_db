@@ -25,10 +25,10 @@ function setCurrentSnd(c) {
 	player.src = 'data/'+audioFiles[currentSnd]['snd'];
 	$('#viz a').removeClass('current');
 	$('#a'+currentSnd).addClass('current');
-	if ('edit/tmp/'+audioFiles[currentSnd]['pict']!=$('#diaPict').attr('src')) {
+	if ('/tmp/'+audioFiles[currentSnd]['pict']!=$('#diaPict').attr('src')) {
 		$('#diaPict').fadeOut(kFadeDuration, function(){
 			if (audioFiles[currentSnd]['pict']!=='') {
-				$('#diaPict').attr('src', 'edit/tmp/'+audioFiles[currentSnd]['pict']);
+				$('#diaPict').attr('src', '/tmp/'+audioFiles[currentSnd]['pict']);
 			}
 		});
 	}
@@ -88,8 +88,6 @@ if (window.location.hash) { $("#wait").hide(); playTrack(parseInt(window.locatio
 
 $(document).ready(function(){
 	$("#diaPict").load(function(){ $(this).fadeIn(); });
-	$("#wait a").bind("mouseenter", function(){ $(this).css({boxShadow:'0 0 80px #aaa'}); });
-	$("#wait a").bind("mouseleave", function(){ $(this).css({boxShadow:''}); });
 	$('#bMode').click(function(e){ e.preventDefault(); toggleMode(); });
 	$('#bPlay').click(function(e){ e.preventDefault(); play(); });
 	$('#bPause').click(function(e){ e.preventDefault(); pause(); });

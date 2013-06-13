@@ -1,3 +1,16 @@
+
+@mixin FIXED_CENTERED($width, $height) {
+	position: fixed;
+	width:$width;
+	height:$height;
+	left:50%;
+	top:40%;
+	margin-left:-$width/2;
+	margin-top:-$height/2;
+}
+
+/*******************************************************************************************************************************************/
+
 body {
 	&.editor { background:#333 url(/i/bg_dia.png); }
 	#page {
@@ -33,8 +46,13 @@ form table {
 	label { width:40px; margin-right:5px; }
 	.number { width:40px; font-size:1.75em; color:#ccc; }
 }
-div.fu { float:left; width:440px; height:25px;background:#F6F6F6; font-family:Lucida Grande, Verdana, sans-serif; font-size:11px; }
-div.fu div.field { width:300px; height:17px; overflow:hidden; float:left; background:#FFFFFF; margin:2px; padding-left:3px; border-left:1px solid #999999; border-top:1px solid #999999; }
+
+div.fu {
+	float:left; width:440px; height:25px;background:#F6F6F6; font-family:Lucida Grande, Verdana, sans-serif; font-size:11px;
+	.rep { float:left; display:none; }
+	.sel { float:left; display:none; }
+	div.field { width:300px; height:17px; overflow:hidden; float:left; background:#FFFFFF; margin:2px; padding-left:3px; border-left:1px solid #999999; border-top:1px solid #999999; }
+}
 div.fu_fileInfo { width:200px; text-overflow:hidden; float:left; margin:6px; }
 
 div.fu_progress { float:left; width:220px; display:none; }
@@ -42,6 +60,10 @@ div.fu_progress img { border:0; float:left; margin:2px; }
 div.progressValue { width:100%; text-align:center; color:#666666; margin-left:20px; }
 div.progressBar { width:200px; background:#CCCCCC; height:10px; margin-left:20px; }
 div.progressLevel { background:red; height:100%; }
+
+a.btn {
+	@include button(simple, #eee);
+}
 
 #btnSave {
 	@include button(shiny, #eee);
@@ -129,17 +151,28 @@ div.paragraph {
 		}
 	}
 }
+
 #fileEdit {
 	position:fixed;
 	z-index:10;
-	left:50%;
-	top:50%;
-	margin-left:-250px;
-	width:500px;
-	height:300px;
-	margin-top:-150px;
+	@include FIXED_CENTERED(580px, 160px);
 	@include linear-gradient(#f6f6f6, #eee);
 	box-shadow:3px 3px 15px rgba(0,0,0,0.4);
+	display:none;
+	>div {
+		margin:12px;
+	}
+	>h1 {
+		margin:0;
+		padding:4px;
+		font:{size:11px;width:bold;}
+		color:#fff;
+		text-shadow:1px 1px 1px rgba(0,0,0,0.3);
+		@include linear-gradient(#555, #222);
+	}
+	.closeBox { float:right; font-size:14px; padding:1px 3px 2px 4px; margin-right:1px; color:#fff; text-decoration:none; }
+	.closeBox:hover { box-shadow:0 0 3px #999; }
+	.btn { display:block; width:40px; text-align:center; margin:10px auto 0 auto; }
 }
 .pSepTarget {
 	height:18px;

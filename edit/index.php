@@ -48,11 +48,14 @@
 								'entities' => $_REQUEST['entities'],
 								'chaptering' => $_REQUEST['chaptering'],
 								'section_title' => $_REQUEST['section_title'],
+								'file' => $_REQUEST['file'],
+								'file_credits' => $_REQUEST['file_credits'],
+								'file_link' => $_REQUEST['file_link'],
 								);
-				if (isset($_REQUEST['u'])) {
-					$datas['file'] = $_REQUEST['u'];
-				}
-				$content = db_s('sounds', array('id' => $_REQUEST['file']));
+#				if (isset($_REQUEST['u'])) {
+#					$datas['file'] = $_REQUEST['u'];
+#				}
+				$content = db_s('sounds', array('id' => $_REQUEST['sound']));
 				if ($f = db_fetch($content)) {
 					db_u('sounds', array('id' => $f['id']), $datas);
 				}
@@ -126,15 +129,19 @@
 	echo '</header>';
 	// =============================================================================================
 	echo '<section id="fileEdit">';
+		echo '<a href="#" onclick="return closeImageForm(false);" class="closeBox">&times;</a>';
+		echo '<h1>Propriétés de l’image</h1>';
+		echo '<div>';
 		beginForm('post');
-			printUploadInput('', 'u', '', array('image/x-png', 'image/png', 'image/jpeg', 'image/pjpeg'), 'tmp/');
+			$fileUploadInputId = printUploadInput('Fichier', 'u', '', array('image/x-png', 'image/png', 'image/jpeg', 'image/pjpeg'), 'tmp/');
 			echo '<br/>';
-			printTextInput('Copyright', 'file_credits', '', 68);
+			printTextInput('Copyright', 'file_credits', '', 81);
 			echo '<br/>';
-			printTextInput('Lien web', 'file_link', '', 68);
+			printTextInput('Lien web', 'file_link', '', 81);
 			echo '<br/>';
-			printSubmitInput('save', 'Enregistrer', true);
+			echo '<a href="#" onclick="return closeImageForm(true);" class="btn">OK</a>';
 		endForm();
+		echo '</div>';
 	echo '</section>';
 	echo '<section id="page">';
 	if (@$_REQUEST['dir']!='' && substr($_REQUEST['dir'], 0, 1)!='.') {
@@ -173,10 +180,14 @@
 					}
 					echo '<br/><br/><small>'.$file.'</small><br/></td>';
 					echo '<td>';
-						printHiddenInput('file', $filePath);
+						printHiddenInput('sound', $filePath);
 						printTextArea('', 'text', $sound['text'], 60, 3);
 						echo '<br/>';
-						printUploadInput('', 'u', $sound['file'], array('image/x-png', 'image/png', 'image/jpeg', 'image/pjpeg'), 'tmp/');
+						printHiddenInput('file', $sound['file']);
+						printHiddenInput('file_credits', $sound['file_credits']);
+						printHiddenInput('file_link', $sound['file_link']);
+						echo '<a href="#" onclick="return showImageForm(\''.$fileUploadInputId.'\', this);" class="btn">Image...</a>';
+#						printUploadInput('', 'u', $sound['file'], array('image/x-png', 'image/png', 'image/jpeg', 'image/pjpeg'), 'tmp/');
 					echo '</td><td>';
 						printTextArea('Liens:', 'entities', $sound['entities'], 20, 3);
 						echo '<br/>';
