@@ -40,8 +40,12 @@
 	-ms-user-select: none;
 	user-select: none;
 }
-@mixin SMOOTH($time) {
-	@include transition(all $time ease);
+@mixin SMOOTH($time:0.3s, $what:all, $how:ease) {
+	-webkit-transition: $what $time $how;
+	-moz-transition: $what $time $how;
+	-o-transition: $what $time $how;
+	-ms-transition: $what $time $how;
+	transition: $what $time $how;
 }
 @mixin SCROLL_Y {
 	overflow:hidden;
@@ -61,7 +65,7 @@
 	margin-top:-($size/2);
 	width:$size;
 	height:$size;
-	border:10px solid #fff;
+	border:$size/16 solid #fff;
 	border-radius:$size;
 	box-shadow:1px 1px 7px rgba(0,0,0,0.3);
 	text-shadow:1px 1px 7px rgba(0,0,0,0.3);

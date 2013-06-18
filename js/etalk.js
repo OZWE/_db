@@ -1,5 +1,5 @@
 var currentSnd = -1;
-var player = document.getElementById("player");
+var player = document.getElementById('player');
 var kFadeDuration = 200;
 function play() {
 	document.getElementById("bPlay").style.display="none";
@@ -14,7 +14,7 @@ function pause() {
 	return false;
 }
 function startedPlay() {
-	$("html, body").animate({scrollTop: $("#a"+currentSnd).offset().top-50}, 1000);
+	$('html, body').animate({scrollTop: $('#a'+currentSnd).offset().top-50}, 1000);
 }
 function endedPlay() {
 	next();
@@ -26,9 +26,10 @@ function setCurrentSnd(c) {
 	$('#viz a').removeClass('current');
 	$('#a'+currentSnd).addClass('current');
 	if ('/tmp/'+audioFiles[currentSnd]['pict']!=$('#diaPict').attr('src')) {
-		$('#diaPict').fadeOut(kFadeDuration, function(){
+		$('#diaPictFrame').fadeOut(kFadeDuration, function(){
 			if (audioFiles[currentSnd]['pict']!=='') {
 				$('#diaPict').attr('src', '/tmp/'+audioFiles[currentSnd]['pict']);
+				$('#diaPictText').html('<a href="'+audioFiles[currentSnd]['pict_link']+'" target="_blank">'+audioFiles[currentSnd]['pict_cred']+'</a>');
 			}
 		});
 	}
@@ -71,14 +72,21 @@ function start() {
 	playTrack(currentSnd);
 	return false;
 }
+function home() {
+	window.location.href = "/";
+}
+function toggleMute() {
+	player.muted = !player.muted;
+	$('#bMute').attr('src', '/i/audio_'+(player.muted?'on':'mute')+'.png');
+}
 function toggleMode() {
 	if ($('#viz').offset().left<0) {
-		$('#btn_mode').attr('src', 'i/mode_full.png');
+		$('#bMode').attr('src', '/i/mode_full.png');
 		$('#viz').animate({'margin-left':0});
 		$('#dia').animate({'left':($('#viz').width()+60)});
 	}
 	else {
-		$('#btn_mode').attr('src', 'i/mode_list.png');
+		$('#bMode').attr('src', '/i/mode_list.png');
 		$('#viz').animate({'margin-left':-($('#viz').width()+60)});
 		$('#dia').animate({'left':0});
 	}
@@ -87,11 +95,13 @@ function toggleMode() {
 if (window.location.hash) { $("#wait").hide(); playTrack(parseInt(window.location.hash.substring(1), 10)); }
 
 $(document).ready(function(){
-	$("#diaPict").load(function(){ $(this).fadeIn(); });
+	$("#diaPict").load(function(){ $("#diaPictFrame").fadeIn(); });
+	$('#bBack').click(function(e){ e.preventDefault(); home(); });
 	$('#bMode').click(function(e){ e.preventDefault(); toggleMode(); });
 	$('#bPlay').click(function(e){ e.preventDefault(); play(); });
 	$('#bPause').click(function(e){ e.preventDefault(); pause(); });
 	$('#bNext').click(function(e){ e.preventDefault(); next(); });
+	$('#bMute').click(function(e){ e.preventDefault(); toggleMute(); });
 	$('#links a.entity').click(function(e){ e.preventDefault(); e.stopPropagation(); openLink($(this).attr('href')); });
 	$('#wait a').click(function(e){ e.preventDefault(); start();});
 	$('#overlay .close').click(function(e){ e.preventDefault(); hideOverlay(); });

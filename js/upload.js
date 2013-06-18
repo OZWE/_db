@@ -107,6 +107,9 @@ function resetFile(id) {
 	$('#rep'+id+'>.field').html('');
 	$('#fFileName'+id).val('');
 	$('#fc'+id).show();
+	$('#f'+id).wrap('<form>').closest('form').get(0).reset();	// show the file input and clear its contents
+	$('#f'+id).unwrap().show();
+	$('#t'+id).hide();
 	$('#info'+id).html('');
 	$('#del'+id).val($('#fFileName'+id).attr('name'));
 }

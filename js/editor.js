@@ -1,6 +1,7 @@
 /* Save & Undo methods */
 
 var kKeepAliveInterval = 2*60*1000;
+var currentButtonForImageEdit = null;
 var currentFormForImageEdit = null;
 var currentFormInput = null;
 
@@ -11,7 +12,8 @@ function notifyChange(input) {
 
 function showImageForm(inputId, boundToLink) {
 	currentFormInput = inputId;
-	currentFormForImageEdit = $(boundToLink).closest('form');
+	currentButtonForImageEdit = $(boundToLink)
+	currentFormForImageEdit = currentButtonForImageEdit.closest('form');
 	currentFileName = currentFormForImageEdit.find('input[name=file]').val();
 	if (currentFileName==='') {
 		resetFile(inputId.substring(9));
@@ -31,9 +33,16 @@ function fileFormCopy(source, target) {
 
 function closeImageForm(save) {
 	if (save) {
-		currentFormForImageEdit.find('input[name=file]').val($('#'+currentFormInput).val());
+		var newFileName = $('#'+currentFormInput).val();
+		currentFormForImageEdit.find('input[name=file]').val(newFileName);
 		fileFormCopy($('#fileEdit'), currentFormForImageEdit);
 		notifyChange(currentFormForImageEdit);
+		if (newFileName!=='') {
+			currentButtonForImageEdit.addClass('filled');
+		}
+		else {
+			currentButtonForImageEdit.removeClass('filled');
+		}
 	}
 	$('#fileEdit').fadeOut();
 	return false;

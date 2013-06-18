@@ -104,13 +104,18 @@
 				db_i('talks', $sel);
 				$talk = db_fetch(db_s('talks', $sel));
 			}
-			printTextInput('Intitulé', 'title', $talk['title'], 120, 255);
-			echo '<br/>';
-			printTextInput('Auteur', 'author', $talk['author'], 40, 255);
-			echo '<br/>';
-			printTextInput('Date', 'date', datetime('d.m.Y', $talk['date']), 10, 10);
+			echo '<div style="width:350px; float:right;">';
+				printTextInput('Date', 'date', datetime('d.m.Y', $talk['date']), 10, 10);
+				echo '<br/>';
+				printTextInput('Thème', 'theme', $talk['theme'], 20, 255);
+			echo '</div>';
+			echo '<div style="width:660px; float:left;">';
+				printTextInput('Intitulé', 'title', $talk['title'], 100, 255);
+				echo '<br/>';
+				printTextInput('Auteur', 'author', $talk['author'], 50, 255);
+			echo '</div>';
 		}
-		echo '<br/><br/><label>Outils :</label>';
+		echo '<div style="clear:both"></div><br/><br/><label>Outils :</label>';
 		endForm();
 		echo '<div id="tools">';
 			echo '<div>';
@@ -186,7 +191,7 @@
 						printHiddenInput('file', $sound['file']);
 						printHiddenInput('file_credits', $sound['file_credits']);
 						printHiddenInput('file_link', $sound['file_link']);
-						echo '<a href="#" onclick="return showImageForm(\''.$fileUploadInputId.'\', this);" class="btn">Image...</a>';
+						echo '<a href="#" onclick="return showImageForm(\''.$fileUploadInputId.'\', this);" class="btn '.($sound['file']==''?'':'filled').'">Image...</a>';
 #						printUploadInput('', 'u', $sound['file'], array('image/x-png', 'image/png', 'image/jpeg', 'image/pjpeg'), 'tmp/');
 					echo '</td><td>';
 						printTextArea('Liens:', 'entities', $sound['entities'], 20, 3);

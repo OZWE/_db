@@ -44,7 +44,7 @@ form table {
 	min-width:1050px;
 	td { padding:0 5px; }
 	label { width:40px; margin-right:5px; }
-	.number { width:40px; font-size:1.75em; color:#ccc; }
+	.number { width:40px; font-size:2em; font-weight:lighter; letter-spacing:-2px; color:#ccc; }
 }
 
 div.fu {
@@ -63,6 +63,14 @@ div.progressLevel { background:red; height:100%; }
 
 a.btn {
 	@include button(simple, #eee);
+	position:relative;
+	&.filled {
+		@include ALPHA(50);
+		padding-left:28px;
+		&:before {
+			content:""; background:url(/i/tick.png) no-repeat center center; width:16px; height:16px; position:absolute; top:6px; left:6px;
+		}
+	}
 }
 
 #btnSave {
