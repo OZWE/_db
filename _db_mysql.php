@@ -193,6 +193,10 @@ function db_fetch($src) {
 	return mysql_fetch_assoc($src);
 }
 
+function db_seek($src, $offset = 0) {
+	return mysql_data_seek($src, $offset);
+}
+
 function db_count($src) {
 	return mysql_num_rows($src);
 }
