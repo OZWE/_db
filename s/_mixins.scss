@@ -73,6 +73,7 @@
 	position:relative;
 	color:transparent;
 	text-decoration:none;
+	@include SMOOTH;
 	&:after {
 		content:"";
 		position:absolute;

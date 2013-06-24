@@ -98,6 +98,7 @@
 		beginForm();
 		printHiddenInput('f', 'saveMetas');
 		if (@$_REQUEST['dir']!='') {
+			printHiddenInput('dir', $_REQUEST['dir']);
 			$sel = array('dir' => @$folders[$_REQUEST['dir']]);
 			$talk = db_fetch(db_s('talks', $sel));
 			if ($talk === false) {

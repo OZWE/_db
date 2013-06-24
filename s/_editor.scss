@@ -15,16 +15,21 @@ body {
 	&.editor { background:#333 url(/i/bg_dia.png); }
 	#page {
 		margin:200px 0 0 0;
-//		border-top:10px solid $kColor_bg;
 		background:$kColor_bg;
 		padding:0;
 	}
-}
-header {
-	&.editor { }
-	form { margin-top:7px; }
-	>label {
-		margin:5px;
+	&>header {
+		form { margin-top:7px; }
+		>label {
+			margin:5px;
+		}
+		#pSeparator {
+			background:#c00 url(/i/drag.png) no-repeat center center;
+			float:left;
+			margin:6px;
+			width:100px;
+			height:14px;
+		}
 	}
 }
 

@@ -1,58 +1,11 @@
 @charset "UTF-8";
 
-$Z_HEADER : 5;
-$Z_OVERLAY : 1;
-$Z_WAIT : 10;
-
-$kColor_bg : #f6f6f6;
-
-
 /** Mixins/Macros */
 @import "bourbon/bourbon";
 @import "_mixins";
 
-/**********************************************************************
- *  Généralités
- **********************************************************************/
-
-body {
-	font-family: Lucida Grande, Verdana, sans-serif; font-size:12px; margin:1em; background:$kColor_bg;
-}
-
-header {
-	position:fixed; top:0; left:0; right:0; width:100%; background:white; box-shadow:0 1px 7px #000; z-index:$Z_HEADER;
-	&.editor { }
-	form { margin-top:7px; }
-	#pSeparator {
-		background:#c00 url(/i/drag.png) no-repeat center center;
-		float:left;
-		margin:6px;
-		width:100px;
-		height:14px;
-	}
-}
-
-img { border:0;}
-h1 { font-size:16px;}
-h2 { font-size:14px; color:#000000; padding-left:0.4em;}
-.label { text-align:right; white-space:nowrap;}
-
-.screen_only { display:inline;}
-.print_only { display:none;}
-
-#page_frame { border:1px solid #999999; margin-top:20px; margin-left:0; padding:5px;}
-
-div.input { padding:2px; margin-left:2px; margin-right:2px; font-size:11px; text-align:center; left:5px; width:120px; display:inline;}
-.hidden { display:none; }
-
-
-
-div.msg { width:80%; margin:auto; margin-bottom:10px; padding:5px;}
-div.error { border:#CC0000 1px solid; color:#CC0000; background-color:#FFF6F6;}
-div.ok { border:#009900 1px solid; color:#009900; background-color:#EEFFEE;}
-div.notice { margin-top:20px; border:#CCBB33 1px solid; color:#555555; background-color:#FFF4DF; font-size:11px; }
-
-
+@import "_globals";
 
 @import "_viewer";
 @import "_editor";
+@import "_embed";
