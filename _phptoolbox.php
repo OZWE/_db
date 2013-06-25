@@ -43,3 +43,6 @@ function printJS($code, $debugMode=false) {
 	}
 	print('<script type="text/javascript" charset="utf-8"> // <![CDATA[ '."\n".$code."\n".'// ]]></script>');
 }
+function markdown($str) {
+	return preg_replace('/(\*)(.+)(\*)/','<b>$2</b>', $str);
+}

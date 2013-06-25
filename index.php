@@ -114,7 +114,7 @@
 				echo '<h2>'.$sound['section_title'].'</h2>';
 			}
 
-			echo '<a class="'.$sound['type'].'" href="#'.$i.'" id="a'.$i.'">'.stripslashes($sound['text']).'</a>';
+			echo '<a class="'.$sound['type'].'" href="#'.$i.'" id="a'.$i.'">'.markdown(stripslashes($sound['text'])).'</a>';
 			$audioFiles[] = $track;
 			$i++;
 		}
