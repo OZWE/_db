@@ -33,6 +33,7 @@ function setCurrentSnd(c) {
 			if (audioFiles[currentSnd]['pict']!=='') {
 				$('#diaPict').attr('src', '/tmp/'+audioFiles[currentSnd]['pict']);
 				$('#dia>caption').html('<a href="'+audioFiles[currentSnd]['pict_link']+'" target="_blank">'+audioFiles[currentSnd]['pict_cred']+'</a>');
+				$('#dia>figure').fadeIn();
 			}
 		});
 	}
