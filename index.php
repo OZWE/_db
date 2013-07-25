@@ -88,7 +88,7 @@
 		echo '</div></aside>';
 	    // _______________________________________________________________________________________________________________________________________
     	echo '<div id="overlay">';
-    		echo '<img src="/i/close.png" class="close" alt="&times;" title="Close" width="22" height="22" />';
+    		echo '<img src="/i/close-w.png" class="close" alt="&times;" title="Close" width="22" height="22" />';
     		echo '<iframe></iframe>';
     	echo '</div>';
 	   	echo '<div id="viz">';
@@ -122,7 +122,7 @@
 	    // _______________________________________________________________________________________________________________________________________
 		echo '<div id="dia"><figure>';
 			echo '<img id="diaPict" src="" alt="" />';
-			echo '<caption></caption>';
+			echo '<figcaption></figcaption>';
 		echo '</figure><div id="links"></div></div>';
 		// _____________________________________
 		echo '<audio id="player" preload="preload" src="/data/'.$audioFiles[0]['snd'].'" onerror="alert(\'The sound file \\\'\'+this.src+\'\\\' could not be loaded.\');" onended="endedPlay();" onloadstart="document.getElementById(\'loading\').style.display=\'inline\';" oncanplay="document.getElementById(\'loading\').style.display=\'none\';" onplay="startedPlay();"><source src="/data/'.$audioFiles[0]['snd'].'" type="audio/mp3" />HTML5 Only!</audio>';

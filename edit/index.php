@@ -46,7 +46,7 @@
 								'text' => $_REQUEST['text'],
 								'type' => $_REQUEST['type'],
 								'entities' => $_REQUEST['entities'],
-								'chaptering' => $_REQUEST['chaptering'],
+								'chaptering' => ($_REQUEST['chaptering']!=''?$_REQUEST['chaptering']:'continue'),
 								'section_title' => $_REQUEST['section_title'],
 								'file' => $_REQUEST['file'],
 								'file_credits' => $_REQUEST['file_credits'],
@@ -60,7 +60,7 @@
 					db_u('sounds', array('id' => $f['id']), $datas);
 				}
 				else {
-					$datas['id'] = $_REQUEST['file'];
+					$datas['id'] = $_REQUEST['sound'];
 					db_i('sounds', $datas);
 				}
 				break;
