@@ -35,10 +35,10 @@ function setCurrentSnd(c) {
 			if (audioFiles[currentSnd]['pict']!=='') {
 				$('#diaPict').attr('src', '/tmp/'+audioFiles[currentSnd]['pict']);
 				if (audioFiles[currentSnd]['pict_link']!='') {
-					$('#dia>figure>figcaption').html('<a href="'+audioFiles[currentSnd]['pict_link']+'" target="_blank">'+audioFiles[currentSnd]['pict_cred']+'</a>');
+					$('#dia>figure>figcaption').html('<a href="'+audioFiles[currentSnd]['pict_link']+'" target="_blank">© '+audioFiles[currentSnd]['pict_cred']+'</a>');
 				}
 				else {
-					$('#dia>figure>figcaption').html(audioFiles[currentSnd]['pict_cred']);
+					$('#dia>figure>figcaption').html('© '+audioFiles[currentSnd]['pict_cred']);
 				}
 				$('#dia>figure').fadeIn();
 			}
