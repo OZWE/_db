@@ -34,12 +34,17 @@ function setCurrentSnd(c) {
 		$('#dia>figure').fadeOut(kFadeDuration, function(){
 			if (audioFiles[currentSnd]['pict']!=='') {
 				$('#diaPict').attr('src', '/tmp/'+audioFiles[currentSnd]['pict']);
-				if (audioFiles[currentSnd]['pict_link']!='') {
-					$('#dia>figure>figcaption').html('<a href="'+audioFiles[currentSnd]['pict_link']+'" target="_blank">© '+audioFiles[currentSnd]['pict_cred']+'</a>');
+				var credits = '';
+				if (audioFiles[currentSnd]['pict_cred'].length > 0) {
+					credits+= '© '+audioFiles[currentSnd]['pict_cred'];
 				}
 				else {
-					$('#dia>figure>figcaption').html('© '+audioFiles[currentSnd]['pict_cred']);
+					credits+= audioFiles[currentSnd]['pict_cred'];
 				}
+				if (audioFiles[currentSnd]['pict_link']!='') {
+					credits+= '<br/><a href="'+audioFiles[currentSnd]['pict_link']+'" target="_blank">'+audioFiles[currentSnd]['pict_link']+'</a>';
+				}
+				$('#dia>figure>figcaption').html(credits);
 				$('#dia>figure').fadeIn();
 			}
 		});

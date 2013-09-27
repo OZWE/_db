@@ -5,7 +5,17 @@
 	include('_db.php');
 	include('_formutils.php');
 
-	$viewMode = (@$_REQUEST['dir']!='' && substr($_REQUEST['dir'], 0, 1)!='.');
+	if (preg_match("/MSIE/", $_SERVER['HTTP_USER_AGENT'])) {
+		$GLOBALS['browser'] = 'ms';
+	}
+	elseif (preg_match("/firefox/i", $_SERVER['HTTP_USER_AGENT'])) {
+		$GLOBALS['browser'] = 'moz';
+	}
+	else {
+		$GLOBALS['browser'] = 'webkit';
+	}
+
+	$viewMode = (@$_REQUEST['dir']!='' && substr($_REQUEST['dir'], 0, 1)!='.' && $_REQUEST['browser']=='webkit');
 	if ($viewMode) {
     	$talk = db_fetch(db_s('talks', array('dir' => $_REQUEST['dir'])));
     	define('PAGE_TITLE', 'eTalk | '.$talk['title']);
@@ -13,6 +23,7 @@
 	else {
 		define('PAGE_TITLE', 'eTalk');
 	}
+
 
 	echo '<!DOCTYPE HTML><html><head><title>'.PAGE_TITLE.'</title>';
 		echo '<link rel="stylesheet" type="text/css" media="screen" href="/s/screen.css" />';
@@ -137,13 +148,24 @@
     		echo '<h1>eTalk</h1><h2>Open-source online talks</h2>';
 		echo '</header>';
 
-		echo '<section><nav>';
-			$talks = array('' => '(sélectionnez une conférence)');
-			$r_t = db_s('talks', array(), array('title' => 'ASC'));
-			while ($t = db_fetch($r_t)) {
-				echo '<a href="?dir='.$t['dir'].'"><figure><div class="play"></div></figure><h2>'.$t['title'].'</h2><p>'.$t['author'].' ('.datetime('d.m.Y', $t['date']).')</p></a>';
-			}
-		echo '</nav></section>';
+		echo '<section>';
+		if ($GLOBALS['browser']!='webkit') {
+			echo '<div>';
+				echo '<h1>Votre navigateur web n’est pas compatible avec la fonctionnalité eTalk.</h1>';
+				echo '<p>Nous vous prions d’utiliser avec l’un des navigateurs suivants:<ul><li>Google Chrome</li><li>Safari</li></ul></p>';
+				echo '<p>Merci de votre compréhension.</p>';
+			echo '</div>';
+		}
+		else {
+			echo '<nav>';
+				$talks = array('' => '(sélectionnez une conférence)');
+				$r_t = db_s('talks', array(), array('title' => 'ASC'));
+				while ($t = db_fetch($r_t)) {
+					echo '<a href="?dir='.$t['dir'].'"><figure><div class="play"></div></figure><h2>'.$t['title'].'</h2><p>'.$t['author'].' ('.datetime('d.m.Y', $t['date']).')</p></a>';
+				}
+			echo '</nav>';
+		}
+		echo '</section>';
     }
 
     echo '</body></html>';

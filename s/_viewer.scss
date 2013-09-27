@@ -30,28 +30,32 @@ img.btn {
 
 
 .viewer {
-	section>nav {
-		margin-top:50px;
-		background:#fff;
-		width:100%;
-		a {
-			figure {
+	>section {
+		>div {
+			padding:20px 40px;
+			margin-top:50px;
+			background:#fff;
+		}
+		>nav {
+			a {
+				figure {
+					display:block;
+					width:120px;
+					height:80px;
+					background:#333;
+					margin-right:20px;
+					float:left;
+					>div { left:49%; top:49%; @include PLAY_BUTTON(40px); }
+				}
 				display:block;
-				width:120px;
-				height:80px;
-				background:#333;
-				margin-right:20px;
-				float:left;
-				>div { left:49%; top:49%; @include PLAY_BUTTON(40px); }
-			}
-			display:block;
-			padding:5px;
-			margin-bottom:10px;
-			color:#000;
-			text-decoration:none;
-			@include clearfix;
-			&:hover {
-				background:#eee;
+				padding:5px;
+				margin-bottom:10px;
+				color:#000;
+				text-decoration:none;
+				@include clearfix;
+				&:hover {
+					background:#eee;
+				}
 			}
 		}
 	}
