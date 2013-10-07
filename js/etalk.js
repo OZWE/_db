@@ -132,7 +132,8 @@ $(document).ready(function(){
 	$('#bBack').bind('click touchstart', function(e){ e.preventDefault(); home(); });
 	$('#bMode').bind('click touchstart', function(e){ e.preventDefault(); toggleMode(); });
 	$('#bPlay').bind('click touchstart', function(e){ e.preventDefault(); play(); });
-	$('#bPause').bind('click touchstart', function(e){ e.preventDefault(); pause(true); });
+	$('#bPause').bind('click touchstart', function(e){ e.preventDefault(); pause(false); });
+	$('#bStop').bind('click touchstart', function(e){ e.preventDefault(); pause(true); });
 	$('#bNext').bind('click touchstart', function(e){ e.preventDefault(); next(); });
 	$('#bMute').bind('click touchstart', function(e){ e.preventDefault(); toggleMute(); });
 	$('#bShare').bind('click touchstart', function(e){ e.preventDefault(); showEmbed(); });

@@ -15,7 +15,7 @@
 		$GLOBALS['browser'] = 'webkit';
 	}
 
-	$viewMode = (@$_REQUEST['dir']!='' && substr($_REQUEST['dir'], 0, 1)!='.' && $_REQUEST['browser']=='webkit');
+	$viewMode = (@$_REQUEST['dir']!='' && substr($_REQUEST['dir'], 0, 1)!='.' && $GLOBALS['browser']=='webkit');
 	if ($viewMode) {
     	$talk = db_fetch(db_s('talks', array('dir' => $_REQUEST['dir'])));
     	define('PAGE_TITLE', 'eTalk | '.$talk['title']);
@@ -46,6 +46,7 @@
 				echo '<img src="/i/mode_full.png" id="bMode" class="btn" alt="Afficher/Masquer le transcript" />';
 				echo '<img src="/i/play.png" id="bPlay" class="btn" alt="PLAY" />';
 				echo '<img src="/i/pause.png" id="bPause" class="btn" alt="PAUSE" />';
+				echo '<img src="/i/stop.png" id="bStop" class="btn" alt="STOP" />';
 				echo '<img src="/i/ffw.png" id="bNext" class="btn" alt="FFW" title="Suivant" />';
 			echo '</nav>';
 	    echo '</header>';
