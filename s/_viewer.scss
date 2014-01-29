@@ -155,11 +155,11 @@ $kVizPadding: 20px;
 	position:fixed; top:0; bottom:0; left:$kVizStdW+(2*$kVizPadding)+20px; right:10px;
 	&>figure {
 		width:100%; text-align:center; display:none;
-		#diaPict { margin:50px auto 0 auto; max-width:100%; max-height:80%; }
+		#diaPict { margin:50px auto 0 auto; max-width:100%; max-height:75%; }
 		&>figcaption, &>figcaption>a { color:#999; text-decoration:none; }
 	}
 	#links {
-		position:absolute; bottom:50px; left:10px; right:10px; height:16px; padding:5px; border-radius:7px; background:url(../i/bg_white.png); text-align:center; display:none;
+		position:absolute; bottom:2%; left:10px; right:10px; height:16px; padding:5px; border-radius:7px; background:url(../i/bg_white.png); text-align:center; display:none;
 		img { margin:0 3px 0 3px; }
 		a.entity {
 			text-decoration:none; color:#666; margin-right:20px;

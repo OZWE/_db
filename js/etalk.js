@@ -1,6 +1,8 @@
 var currentSnd = -1;
 var player = document.getElementById('player');
 var kFadeDuration = 200;
+var kDisableRightClick = (window.location.href.indexOf('etalk.cc') === -1);
+
 function play() {
 	$('#bPlay').hide();
 	document.getElementById("bPause").style.display="inline";
@@ -145,4 +147,12 @@ $(document).ready(function(){
 	$('#overlay .close').bind('click touchstart', function(e){ e.preventDefault(); hideOverlay(); });
 	$('#viz>*').bind('dragstart', function(e){ e.preventDefault(); });		// Prevent HTML elements dragging
 	$('#viz>a').bind('click touchstart', function(e){ e.preventDefault(); playTrack($(this).attr('href').replace('#', '')); });
+	if (kDisableRightClick) {
+		$(document.body).bind('contextmenu', function(e) {
+			e.preventDefault();
+		});
+		$(document.body).bind('mousedown', function(e) {
+			e.preventDefault();
+		});
+	}
 });
