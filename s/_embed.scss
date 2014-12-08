@@ -23,11 +23,11 @@ $kEmbedPlayerBorder : 1px solid #bbb;
 @media screen and (max-width: 800px) {
 	body {
 		margin:0;
-		&>header {
-			width:185px; left:auto;
-			&>nav:first-child { display:none; }
-			>#controls { margin-right:5px; }
-		}
+	}
+	header#top {
+		width:185px; left:auto;
+		&>nav:first-child { display:none; }
+		>#controls { margin-right:5px; }
 	}
 	#wait {
 		&>header {

@@ -35,8 +35,10 @@
 
     // Page Content ============================================================================================================================================
     if ($viewMode) {
-	    echo '<header>';
-	    	echo '<nav><img src="/i/back.png" id="bBack" alt="Back" class="btn" title="Retour à l’accueil" /></nav>';
+	    echo '<header id="top">';
+	    	if (!isset($_REQUEST['embed'])) {
+		    	echo '<nav><img src="/i/back.png" id="bBack" alt="Back" class="btn" title="Retour à l’accueil" /></nav>';
+		    }
 #	    	echo '<h1>'.$talk['title'].'</h1>';
 #	    	echo '<h2>'.$talk['author'].' &mdash; '.implode('.', array_reverse(explode('-', $talk['date']))).'</h2>';
 	    	echo '<nav id="controls">';
@@ -44,10 +46,11 @@
 				echo '<img src="/i/share.png" id="bShare" class="btn" alt="SHARE" title="Partager / Intégrer" />';
 				echo '<img src="/i/audio_mute.png" id="bMute" class="btn" alt="MUTE" title="Activer/Couper le son" />';
 				echo '<img src="/i/mode_full.png" id="bMode" class="btn" alt="Afficher/Masquer le transcript" />';
-				echo '<img src="/i/play.png" id="bPlay" class="btn" alt="PLAY" />';
+				echo '<img src="/i/prev.png" id="bPrev" class="btn" alt="◀︎◀︎" title="Précédent" />';
+				echo '<img src="/i/play.png" id="bPlay" class="btn" alt="▶︎" />';
 				echo '<img src="/i/pause.png" id="bPause" class="btn" alt="PAUSE" />';
-				echo '<img src="/i/stop.png" id="bStop" class="btn" alt="STOP" />';
-				echo '<img src="/i/ffw.png" id="bNext" class="btn" alt="FFW" title="Suivant" />';
+				echo '<img src="/i/stop.png" id="bStop" class="btn" alt="◼︎" />';
+				echo '<img src="/i/ffw.png" id="bNext" class="btn" alt="▶︎▶︎" title="Suivant" />';
 			echo '</nav>';
 	    echo '</header>';
 	    // _______________________________________________________________________________________________________________________________________
@@ -69,7 +72,7 @@
 				}
 				$docsFolder = 'data/'.$_REQUEST['dir'].'/docs';
 				if (is_dir($docsFolder)) {
-					echo '<br/><br/><h2>Fichiers liés</h2>';
+					echo '<br/><h2>Fichiers liés</h2>';
 					$files = scandir($docsFolder, 0);
 					foreach ($files as $f) {
 						if (substr($f, 0, 1)!='.' && !is_dir($docsFolder.'/'.$f)) {
@@ -81,6 +84,7 @@
     	echo '</div>';
 	    // _______________________________________________________________________________________________________________________________________
 		echo '<aside id="embed"><div><div class="close">&times;</div><h1>Intégrer cette présentation</h1>';
+			echo '<input id="fShareURL" type="text" readonly="readonly" style="float:right;width:87%;border:1px solid #000;margin-top:-1px;" /><label>URL:</label><br/>';
 			echo '<textarea id="embed_code" readonly="readonly"></textarea>';
 			echo '<form id="embed_customize" action="/">';
 				echo '<fieldset><legend>Dimensions :</legend>';
@@ -137,15 +141,15 @@
 			echo '<figcaption></figcaption>';
 		echo '</figure><div id="links"></div></div>';
 		// _____________________________________
-		echo '<audio id="player" preload="preload" src="/data/'.$audioFiles[0]['snd'].'" onerror="alert(\'The sound file \\\'\'+this.src+\'\\\' could not be loaded.\');" onended="endedPlay();" onloadstart="document.getElementById(\'loading\').style.display=\'inline\';" oncanplay="document.getElementById(\'loading\').style.display=\'none\';" onplay="startedPlay();"><source src="/data/'.$audioFiles[0]['snd'].'" type="audio/mp3" />HTML5 Only!</audio>';
-#		echo '<audio id="preloader" preload="preload" src="/data/'.$audioFiles[1]['snd'].'"><source src="/data/'.$audioFiles[1]['snd'].'" type="audio/mp3" />HTML5 Only!</audio>';
+		echo '<audio id="player" preload="auto" src="/data/'.$audioFiles[0]['snd'].'" onerror="alert(\'The sound file \\\'\'+this.src+\'\\\' could not be loaded.\');" onended="endedPlay();" onloadstart="document.getElementById(\'loading\').style.display=\'inline\';" oncanplay="document.getElementById(\'loading\').style.display=\'none\';" onplay="startedPlay();"><source src="/data/'.$audioFiles[0]['snd'].'" type="audio/mp3" />HTML5 Only!</audio>';
+#		echo '<audio id="preloader" preload="auto" src="/data/'.$audioFiles[1]['snd'].'"><source src="/data/'.$audioFiles[1]['snd'].'" type="audio/mp3" />HTML5 Only!</audio>';
 
 	    // Load and init etalk modules
 	    printJS('var audioFiles = ('.json_encode($audioFiles).');');
 		echo '<script type="text/javascript" src="/js/etalk.min.js"></script>';
     }
     else {
-    	echo '<header>';
+    	echo '<header id="top">';
     		echo '<h1>eTalk</h1><h2>Open-source online talks</h2>';
 		echo '</header>';
 
@@ -153,7 +157,7 @@
 		if ($GLOBALS['browser']!='webkit') {
 			echo '<div>';
 				echo '<h1>Votre navigateur web n’est pas compatible avec la fonctionnalité eTalk.</h1>';
-				echo '<p>Nous vous prions d’utiliser avec l’un des navigateurs suivants:<ul><li>Google Chrome</li><li>Safari</li></ul></p>';
+				echo '<p>Nous vous prions d’utiliser avec l’un des navigateurs suivants:<ul><li>Google Chrome</li><li>Safari (version ≥7)</li><li>Internet Explorer (version 11)</li></ul></p>';
 				echo '<p>Merci de votre compréhension.</p>';
 			echo '</div>';
 		}

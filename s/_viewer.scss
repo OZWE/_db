@@ -1,26 +1,3 @@
-body {
-	&.viewer { background:url(../i/bg_dia.png); }
-	&>header {
-		@include NO_SELECT;
-		&.viewer { height:35px; }
-		>nav {
-			@include ALPHA(30);
-			@include SMOOTH(0.5s);
-			&:hover {
-				@include ALPHA(70);
-			}
-		}
-		h1 { float:left; width:49%; text-align:right; margin-top:6px; @extend .logo; }
-		h2 { font-weight:normal; padding:0; margin:13px 0 7px 0; }
-		#bBack { margin:3px 0 0 15px; float:left; cursor:pointer; }
-		#controls {
-			float:right; margin:2px 20px 0 0;
-			#bPause { display:none; }
-			#loading { display:none; }
-		}
-	}
-}
-
 img.btn {
 	padding:4px; width:16px; height:16px; cursor:pointer; border-radius:4px; margin-left:5px;
 	&:hover {
@@ -28,8 +5,8 @@ img.btn {
 	}
 }
 
-
 .viewer {
+	background:url(/i/bg_dia.png);
 	>section {
 		>* {
 			padding:20px 40px;
@@ -52,6 +29,7 @@ img.btn {
 				margin-bottom:10px;
 				color:#000;
 				text-decoration:none;
+				*zoom:1;
 				@include clearfix;
 				&:hover {
 					background:#eee;
@@ -64,6 +42,26 @@ img.btn {
 		overflow:hidden;
 		 #viz,#dia { -webkit-filter:blur(3px); }
 		 #wait { overflow-y:scroll; }
+	}
+}
+
+header#top {
+	@include NO_SELECT;
+	&.viewer { height:35px; }
+	>nav {
+		@include ALPHA(30);
+		@include SMOOTH(0.5s);
+		&:hover {
+			@include ALPHA(70);
+		}
+	}
+	h1 { float:left; width:49%; text-align:right; margin-top:6px; @extend .logo; }
+	h2 { font-weight:normal; padding:0; margin:13px 0 7px 0; }
+	#bBack { margin:3px 0 0 15px; float:left; cursor:pointer; }
+	#controls {
+		float:right; margin:2px 20px 0 0;
+		#bPause { display:none; }
+		#loading { display:none; }
 	}
 }
 
@@ -99,18 +97,18 @@ $kVizPadding: 20px;
 	>header {
 		width:46%; margin:2%;
 		a.vidPlay { top:150px; left:50%; @include PLAY_BUTTON(200px); }
-		h1 { font-size:40px; text-decoration:none; margin:2% 0; text-shadow:1px 1px 4px #000; }
-		h2 { font-size:25px; text-decoration:none; margin:3% 0; text-shadow:1px 1px 2px #000; }
+		h1 { font-size:30px; text-decoration:none; margin:2% 0; text-shadow:1px 1px 4px #000; }
+		h2 { font-size:20px; text-decoration:none; margin:3% 0; text-shadow:1px 1px 2px #000; }
 	}
 	nav {
-		position:absolute; width:40%; right:0; top:5%; bottom:5%; overflow:auto; padding:10px 30px; border-right:1px solid #ccc;
-		h2 { font-size:24px; margin:5px 0 35px 0; }
+		position:absolute; width:40%; right:0; top:0; bottom:0; overflow:auto; padding:10px 30px; border-right:1px solid #ccc;
+		h2 { font-size:18px; margin:5px 0 15px 0; }
 		a {
-			font:{size:18px;}; color:#eee; margin:15px; text-decoration:none; display:block;
+			font:{size:13px;}; color:#eee; margin: 4px 15px; text-decoration:none; display:block;
 			@include SMOOTH;
 			&:hover { text-shadow:1px 1px 10px rgba(255,255,255,0.5); color:#fff; }
 			&.doc {
-				font-size:11px; width:120px; position:relative; margin:10px 10px 10px 40px; float:left; text-align:left;
+				font-size:11px; width:120px; position:relative; margin:5px 10px 10px 40px; float:left; text-align:left;
 				&:before { content:"PDF"; text-align:center; font-size:8px; line-height:32px; background:url(/i/doc_icon.png); width:32px; height:32px; position:absolute; top:0; left:-35px; }
 			}
 		}
@@ -120,7 +118,7 @@ $kVizPadding: 20px;
 	@include FIXED_FULL; background:url(/i/bg_black.png); display:none; z-index:10000; @include user-select(none);
 	* { -webkit-user-select: text; }
 	>div {
-		@include ABSOLUTE_CENTERED_X(50%); @include ABSOLUTE_CENTERED_Y(50%); height:275px; @include linear-gradient(#eee,#ddd); box-shadow:0 0 4px rgba(0,0,0,0.2);
+		@include ABSOLUTE_CENTERED_X(50%); @include ABSOLUTE_CENTERED_Y(50%); height:295px; @include linear-gradient(#eee,#ddd); box-shadow:0 0 4px rgba(0,0,0,0.2);
 		padding:20px;
 		>img { display:block; margin:45px 40px; width:142px; height:35px; }
 	}

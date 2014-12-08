@@ -2,6 +2,7 @@ var currentSnd = -1;
 var player = document.getElementById('player');
 var kFadeDuration = 200;
 var kDisableRightClick = (window.location.href.indexOf('etalk.cc') === -1);
+var kSpaceKeyCode = 32;
 
 function play() {
 	$('#bPlay').hide();
@@ -29,7 +30,7 @@ function endedPlay() {
 function setCurrentSnd(c) {
 	currentSnd = c;
 	location.hash = c;
-	player.src = 'data/'+audioFiles[currentSnd]['snd'];
+	player.src = '/data/'+audioFiles[currentSnd]['snd'];
 	$('#viz a').removeClass('current');
 	$('#a'+currentSnd).addClass('current');
 	if ('/tmp/'+audioFiles[currentSnd]['pict']!=$('#diaPict').attr('src')) {
@@ -66,12 +67,22 @@ function playTrack(index) {
 	return false;
 }
 function next() {
-    if (currentSnd < audioFiles.length-1) {
+	if (currentSnd < audioFiles.length-1) {
 		setCurrentSnd(parseInt(currentSnd,10)+1);
 		play();
 	}
 	else {
 		alert('End of the track.');
+	}
+	return false;
+}
+function prev() {
+	if (currentSnd > 0) {
+		setCurrentSnd(parseInt(currentSnd,10)-1);
+		play();
+	}
+	else {
+		alert('Start of the track.');
 	}
 	return false;
 }
@@ -112,6 +123,7 @@ function updateEmbedCode() {
 		code+= 'document.write(unescape("%3Cscript src=\\\''+serviceURL+'\\\' type=\\\'text/javascript\\\'%3E%3C/script%3E"));';
 		code+= '</script>';
 	$('#embed_code').text(code);
+	$('#fShareURL').val(window.location);
 }
 function showEmbed() {
 	updateEmbedCode();
@@ -137,10 +149,11 @@ $(document).ready(function(){
 	$('#bPause').bind('click touchstart', function(e){ e.preventDefault(); pause(false); });
 	$('#bStop').bind('click touchstart', function(e){ e.preventDefault(); pause(true); });
 	$('#bNext').bind('click touchstart', function(e){ e.preventDefault(); next(); });
+	$('#bPrev').bind('click touchstart', function(e){ e.preventDefault(); prev(); });
 	$('#bMute').bind('click touchstart', function(e){ e.preventDefault(); toggleMute(); });
 	$('#bShare').bind('click touchstart', function(e){ e.preventDefault(); showEmbed(); });
 	$('#embed>div').bind('click touchstart', function(e){e.stopPropagation();});
-	$('#embed_code').bind('mouseup', function(){this.select();});
+	$('#embed_code,#fShareURL').bind('mouseup', function(){this.select();});
 	$('#embed input').bind('input change', function(/*e*/){updateEmbedCode();});
 	$('#wait a.vidPlay').bind('click touchstart', function(e){ e.preventDefault(); play();});
 	$('#wait>nav>a:not(.doc)').bind('click touchstart', function(e){ e.preventDefault(); playTrack($(this).attr('href').replace('#',''));});
@@ -151,8 +164,13 @@ $(document).ready(function(){
 		$(document.body).bind('contextmenu', function(e) {
 			e.preventDefault();
 		});
-		$(document.body).bind('mousedown', function(e) {
-			e.preventDefault();
-		});
 	}
+	$(window).keydown(function(e) {
+		console.log(e.keyCode);
+		if (kSpaceKeyCode == e.keyCode) { // ESC
+			pause(true);
+			return false;
+		}
+		return true;
+	});
 });
